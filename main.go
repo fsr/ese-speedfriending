@@ -199,6 +199,6 @@ func main() {
     http.HandleFunc("/free", handleFreeTemplate)
     http.HandleFunc("/linklist", handleLinkList)
     http.HandleFunc("/freelist", handleFreeList)
-    log.Printf("listening on %s%s", conf.BaseURL, conf.Port)
+    log.Printf("base url %s (listen on %s)", conf.BaseURL, conf.Port)
     http.ListenAndServe(conf.Port, nil)
 }
