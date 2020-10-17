@@ -1,8 +1,65 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
     <script src="jitsiroulette.js"></script>
+    <title>Speedfriending</title>
+<style>
+    li#start a {
+        cursor: pointer;
+    }
+    li#pairing {
+        display: none;
+    }
+</style>
 </head>
 <body>
-please wait, you will be redirected soon
+    <header id="page-header">
+        <div class="grid-container">
+            <div class="grid-x grid-padding-x align-middle">
+                <div class="cell medium-2">
+                    <a href="/" id="page-logo">
+                        <img alt="ESE2020" title="ESE2020" src="logo.svg">
+                    </a>
+                </div>
+
+                <div class="cell medium-10">
+
+                    <div id="page-navigation">
+                        <nav id="nav-main">
+                            <ul>
+                                <li id="start"><a class="nav-item-link" onclick="start()">Start Pairing</a></li>
+                                <li id="pairing"><a class="nav-item-link">Pairing...</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main id="page-content">
+        <div class="grid-container">
+            <div class="grid-x grid-padding-x">
+                <div class="cell">
+                    <h1>Speedfriending</h1>
+                    $anleitung_für_speedfriending
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer id="page-footer">
+        <div class="grid-container">
+            <div class="grid-x grid-padding-x">
+                <div class="cell medium-4">
+                </div>
+                <div class="cell medium-8">
+                </div>
+            </div>
+        </div>
+    </footer>
+
 </body>
 </html>

@@ -47,7 +47,7 @@ func cleanUp() {
         return
     }
     now := time.Now()
-    timeout, _ := time.ParseDuration("30s")
+    timeout, _ := time.ParseDuration("10s")
     if now.Sub(waitingClient.LastAccess) > timeout {
         // delete from client list
         delete(c.Uuids, waitingClient.ID)
@@ -99,6 +99,7 @@ func handlePoll(w http.ResponseWriter, r *http.Request) {
 
     if currentClient == nil {
         log.Printf("uuid %s not registered", uuid)
+        fmt.Fprintf(w, "nouuid")
         c.M.Unlock()
         return
     }
@@ -119,10 +120,6 @@ func handlePoll(w http.ResponseWriter, r *http.Request) {
     }
 
     c.M.Unlock()
-}
-
-type freeData struct {
-    URL string
 }
 
 func main() {
