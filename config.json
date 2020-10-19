@@ -3,5 +3,6 @@
 	"Servers": [
 		"https://meet0.ese.ifsr.de",
 		"https://meet1.ese.ifsr.de"
-	]
+	],
+	"MetricsFile": "/var/lib/speedfriending/metrics.txt"
 }

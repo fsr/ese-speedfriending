@@ -8,6 +8,7 @@ import (
     "net/http"
     "sync"
     "time"
+    "os"
 
     "github.com/segmentio/ksuid"
 )
@@ -16,6 +17,7 @@ type config struct {
     Servers []string
     PpS      int
     Port     string
+    MetricsFile string
 }
 
 type free struct {
@@ -38,6 +40,7 @@ var conf config
 var linklist []string
 var c clients
 var serverIdx int
+var metricsFile *os.File
 
 var waitingClient *client
 
@@ -68,6 +71,8 @@ func tryToPair(currentClient *client) {
         serverIdx += 1
         idx := serverIdx % len(conf.Servers)
         server := conf.Servers[idx]
+
+        fmt.Fprintf(metricsFile, "%s\n", time.Now().UnixNano())
 
         link := fmt.Sprintf("%s/%s", server, currentClient.ID)
         waitingClient.Link = link
@@ -132,6 +137,12 @@ func main() {
 
     waitingClient = nil
     c.Uuids = make(map[string]*client)
+
+    metricsFile, err = os.OpenFile(conf.MetricsFile, os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600)
+    if err != nil {
+        log.Fatalf("error opening metrics file: %v", err)
+    }
+    defer metricsFile.Close()
 
     http.Handle("/", http.FileServer(http.Dir("static")))
     http.HandleFunc("/api/register", handleRegister)
