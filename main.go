@@ -72,7 +72,7 @@ func tryToPair(currentClient *client) {
         idx := serverIdx % len(conf.Servers)
         server := conf.Servers[idx]
 
-        fmt.Fprintf(metricsFile, "%s\n", time.Now().UnixNano())
+        fmt.Fprintf(metricsFile, "%d\n", time.Now().UnixNano())
 
         link := fmt.Sprintf("%s/%s", server, currentClient.ID)
         waitingClient.Link = link
